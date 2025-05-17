@@ -2,7 +2,7 @@
 #include <math.h>
 #include <string.h>
 
-void ingresarTiempoDisponible(int *tiempoDisponible) {
+void ingresarTiempoDisponible(int *tiempoDisponible){
     int val;
     do {
         printf("Ingrese el tiempo disponible de produccion (en semanas): ");
@@ -25,22 +25,18 @@ void ingresarRecursosDisponibles(int *recursosDisponibles) {
     } while (*recursosDisponibles <= 0 || val != 1);
 }
 
-void ingresarProductos(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int *numProductos) // CASO 1
-{ // INGRESAR PRODUCTO
-    
+void ingresarProductos(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int *numProductos){ // CASO 1
+ // INGRESAR PRODUCTO
     int i, j, k, val = 0;
     char nombreTemporal[30];
 
-    for (i = 0; i < 5; i++)
-    {
+    for (i = 0; i < 5; i++){
         int nombreValido = 0;
-        while (nombreValido == 0) 
-        {
+        while (nombreValido == 0){
             printf("Producto %d:\n", i + 1);
             printf("Nombre: ");
             fflush(stdin); 
             scanf("%s", nombreTemporal);
-
             // Verificar duplicados
             nombreValido = 1;
             for (j = 0; j < i; j++) {
@@ -62,24 +58,21 @@ void ingresarProductos(char nombres[][30], int tiempos[], int recursos[], int ca
                 nombres[i][k] = '\0';
             }
         }
-        do // CANTIDAD A FABRICAR DE CADA  PRODUCTO 
-        {
+        do{ // CANTIDAD A FABRICAR DE CADA  PRODUCTO
             printf("Cantidad a fabricar de %s: ", nombres[i]);
             fflush(stdin);
             val = scanf("%d", &cantidades[i]);
             if (val != 1 || cantidades[i] < 0)
                 printf("Valor fuera del rango permitido o entrada no numerica.\n");
         } while (val != 1 || cantidades[i] < 0);
-        do // TIEMPO DE FABRICACIÓN DE CADA PRODUCTO
-        {
+        do{ // TIEMPO DE FABRICACIÓN DE CADA PRODUCTO
             printf("Tiempo de fabricacion (en semanas) de %d %s: ", cantidades[i], nombres[i]);
             fflush(stdin);
             val = scanf("%d", &tiempos[i]);
             if (val != 1 || tiempos[i] < 0)
                 printf("Valor fuera del rango permitido o entrada no numerica.\n");
         } while (val != 1 || tiempos[i] < 0);
-        do // RECURSOS REQUERIDOS EN CADA PRODUCTO
-        {
+        do{ // RECURSOS REQUERIDOS EN CADA PRODUCTO
             printf("Cantidad de kg de metal (recursos) necesarios para %d %s: ", cantidades[i], nombres[i]);
             fflush(stdin);
             val = scanf("%d", &recursos[i]);
@@ -88,8 +81,7 @@ void ingresarProductos(char nombres[][30], int tiempos[], int recursos[], int ca
         } while (val != 1 || recursos[i] < 0);
     }
 }
-void editarProducto(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int numProductos) // CASO 2
-{  
+void editarProducto(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int numProductos){ // CASO 2
     int i; 
     if (cantidades[i] == 0) {
         printf("No hay productos ingresados.\n");
@@ -116,18 +108,15 @@ void editarProducto(char nombres[][30], int tiempos[], int recursos[], int canti
             printf("Ingrese nuevos datos:\n");
             printf("Nuevo nombre: ");
             scanf("%s", nombres[i]);
-            do
-            { 
+            do{ 
                 printf("Cantidad a fabricar %s: ", nombres[i]); // NUEVA CANTIDAD
                 fflush(stdin);
                 val = scanf("%d", &cantidades[i]);
-                if (val != 1 || cantidades[i] < 0)
-                {
+                if (val != 1 || cantidades[i] < 0){
                     printf("Valor fuera del rango permitido o entrada no numerica.\n");
                 }
             } while (val != 1 || cantidades[i] < 0);
-            do
-            {
+            do{
                 printf("Tiempo de fabricacion (en semanas) de %d %s: ", cantidades[i], nombres[i]); // NUEVO TIEMPO
                 fflush(stdin);
                 val = scanf("%d", &tiempos[i]);
@@ -135,8 +124,7 @@ void editarProducto(char nombres[][30], int tiempos[], int recursos[], int canti
                     printf("Valor fuera del rango permitido o entrada no numerica.\n");
             } while (val != 1 || tiempos[i] < 0);
 
-            do
-            {
+            do{
                 printf("Cantidad de kg de metal (recursos) necesarios para %d %s: ", cantidades[i], nombres[i]); // NUEVOS RECURSOS
                 fflush(stdin);
                 val = scanf("%d", &recursos[i]);
@@ -152,8 +140,7 @@ void editarProducto(char nombres[][30], int tiempos[], int recursos[], int canti
         printf("Producto no encontrado.\n");
     }
 }
-void eliminarProducto(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int *numProductos) // CASO 3
-{ 
+void eliminarProducto(char nombres[][30], int tiempos[], int recursos[], int cantidades[], int *numProductos){ // CASO 3
     int i; 
     if (cantidades[i] == 0) {
         printf("No hay productos ingresados.\n");
@@ -194,8 +181,7 @@ void eliminarProducto(char nombres[][30], int tiempos[], int recursos[], int can
         printf("Producto no encontrado.\n");
     }
 }
-void calcularProduccion(int tiempos[], int recursos[], int cantidades[], int numProductos, int *tiempoTotal, int *recursosTotales) { // CASO 4
-    
+void calcularProduccion(int tiempos[], int recursos[], int cantidades[], int numProductos, int *tiempoTotal, int *recursosTotales){ // CASO 4
     // SUMA LOS TOTALES DE TODO 
     *tiempoTotal = 0;
     *recursosTotales = 0;
@@ -204,8 +190,8 @@ void calcularProduccion(int tiempos[], int recursos[], int cantidades[], int num
         *recursosTotales += recursos[i];
     }
 }
-void verificarCapacidad(int tiempoTotal, int recursosTotales, int cantidades[], int tiempoDisponible, int recursosDisponibles, int numProductos) // CASO 4
-{
+void verificarCapacidad(int tiempoTotal, int recursosTotales, int cantidades[], int tiempoDisponible, int recursosDisponibles, int numProductos){ // CASO 4
+
     int i;
     // VERIFICA QUE LO DISPONIBLE SEA MENOR O IGUAL A LO REQUERIDO
     printf("\n--- Verificacion de Capacidad ---\n");
@@ -213,19 +199,15 @@ void verificarCapacidad(int tiempoTotal, int recursosTotales, int cantidades[], 
     printf("Recursos totales requeridos: %d kg de metal\n", recursosTotales);
     printf("Tiempo disponible: %d semanas\n", tiempoDisponible);
     printf("Recursos disponibles: %d de metal\n", recursosDisponibles);
-    if (tiempoTotal <= tiempoDisponible && recursosTotales <= recursosDisponibles)
-    {
+    if (tiempoTotal <= tiempoDisponible && recursosTotales <= recursosDisponibles){
         printf("La fabrica SI puede cumplir con la demanda.\n");
     }
-    else
-    {
+    else{
         printf("La fabrica NO puede cumplir con la demanda.\n");
-        if (tiempoTotal > tiempoDisponible && recursosTotales < recursosDisponibles)
-        {
+        if (tiempoTotal > tiempoDisponible && recursosTotales < recursosDisponibles){
             printf("Se cumplen los recursos pero no se cumplen los tiempos.\n "); 
         }
-        else if (tiempoTotal < tiempoDisponible && recursosTotales > recursosDisponibles)
-        {
+        else if (tiempoTotal < tiempoDisponible && recursosTotales > recursosDisponibles){
             printf("Se cumplen los tiempos pero no se cumplen los recursos.\n "); 
         }
     }

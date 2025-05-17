@@ -35,12 +35,10 @@ int main()
             mostrarProductos(nombres, tiempos, recursos, cantidades, numProductos);
             break;
         case 5:
-            if (cantidades[i] == 0)
-            {
+            if (cantidades[i] == 0){
                 printf("No hay productos registrados.\n"); 
             }
-            else 
-            {
+            else{
             calcularProduccion(tiempos, recursos, cantidades, numProductos, &tiempoTotal, &recursosTotales);
             verificarCapacidad(tiempoTotal, recursosTotales, cantidades, tiempoDisponible, recursosDisponibles, numProductos);
             }
