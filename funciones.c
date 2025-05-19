@@ -191,7 +191,6 @@ void calcularProduccion(int tiempos[], int recursos[], int cantidades[], int num
     }
 }
 void verificarCapacidad(int tiempoTotal, int recursosTotales, int cantidades[], int tiempoDisponible, int recursosDisponibles, int numProductos){ // CASO 4
-
     int i;
     // VERIFICA QUE LO DISPONIBLE SEA MENOR O IGUAL A LO REQUERIDO
     printf("\n--- Verificacion de Capacidad ---\n");
